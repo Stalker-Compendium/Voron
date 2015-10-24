@@ -1,0 +1,386 @@
+-- File:        VORON_UI_MM_SI_DLG.SCRIPT
+-- Description: Spawner Dialog for STALKER CS
+-- Created:     05.01.2010
+-- Last edit:	05.02.2010
+-- Copyright:   2010 STALKER COMPENDIUM
+-- Author:      Xavier De La Obra (stalkercompendium@free.fr)
+-- Version:     0.1
+
+local artefacts = {
+					"af_medusa", 				-- 1
+					"af_cristall_flower", 		-- 2
+					"af_night_star", 			-- 3
+					"af_vyvert", 				-- 4
+					"af_gravi", 				-- 5
+					"af_gold_fish", 			-- 6
+					"af_cristall", 				-- 7
+					"af_fireball", 				-- 8
+					"af_dummy_glassbeads", 		-- 9
+					"af_eye", 					-- 10
+					"af_fire", 					-- 11
+					"af_blood", 				-- 12
+					"af_mincer_meat", 			-- 13
+					"af_soul", 					-- 14
+					"af_fuzz_kolobok", 			-- 15
+					"af_baloon", 				-- 16
+					"af_glass", 				-- 17
+					"af_electra_sparkler", 		-- 18
+					"af_electra_flash", 		-- 19
+					"af_electra_moonlight", 	-- 20
+					"af_dummy_battery", 		-- 21
+					"af_dummy_dummy", 			-- 22
+					"af_ice", 					-- 23
+					"af_compass", 				-- 24
+					"mil_quest_af_fuzz_kolobok" -- 25
+}
+local outfits = {
+					"novice_outfit", 		-- 1
+					"bandit_outfit", 		-- 2
+					"stalker_outfit", 		-- 3
+					"cs_light_outfit",		-- 4
+					"svoboda_light_outfit",	-- 5
+					"scientific_outfit",	-- 6
+					"cs_heavy_outfit",		-- 7
+					"dolg_outfit",			-- 8
+					"svoboda_heavy_outfit",	-- 9
+					"specops_outfit",		-- 10
+					"exo_outfit",			-- 11
+					"dolg_heavy_outfit",	-- 12
+					"svoboda_exo_outfit",	-- 13
+					"military_outfit"		-- 14
+}
+local devices = {
+					"device_pda",					-- 1
+					"device_torch",					-- 2
+					"detector_simple",				-- 3
+					"detector_advanced",			-- 4
+					"detector_elite",				-- 5
+					"device_pda_fang",				-- 6
+					"esc_trader_habar",				-- 7
+					"device_pda_military",			-- 8
+					"device_pda_old",				-- 9
+					"device_pda_garbage_traitor",	-- 10
+					"device_pda_comendant",			-- 11
+					"device_pda_freedom",			-- 12
+					"device_pda_bloodsucker",		-- 13
+					"device_pda_digger",			-- 14
+}
+local food_n_drugs = {
+					"bread",			-- 1           
+					"kolbasa",			-- 2
+					"conserva",			-- 3
+					"vodka",			-- 4
+					"antirad",			-- 5
+					"medkit",			-- 6
+					"medkit_army",		-- 7
+					"medkit_scientic",	-- 8  
+					"energy_drink",		-- 9
+					"bandage"			-- 10
+}
+local wpn_addons = {
+					"wpn_addon_scope",					-- 1
+					"wpn_addon_scope_4x",				-- 2
+                    "wpn_addon_scope_susat",			-- 3
+                    "wpn_addon_silencer",				-- 4
+					"wpn_addon_grenade_launcher",		-- 5
+                    "wpn_addon_grenade_launcher_m203"	-- 6
+}
+
+local wpn_pistols = {
+					"wpn_pm",				-- 1
+					"wpn_pm_up",			-- 2
+					"wpn_pm_9x19",			-- 3
+					"wpn_pm_minigame",		-- 4
+					"mar_quest_wpn_pm_1",	-- 5
+					"wpn_pb",				-- 6
+					"wpn_fort",				-- 7
+					"wpn_hpsa",				-- 8
+					"wpn_beretta",			-- 9
+					"wpn_beretta_minigame",	-- 10
+					"wpn_walther",			-- 11
+					"wpn_sig220",			-- 13
+					"wpn_sig550",			-- 14
+					"wpn_sig550_minigame",	-- 15
+					"wpn_colt1911",			-- 16
+					"wpn_usp",				-- 17
+					"wpn_desert_eagle",		-- 18
+					"wpn_desert_eagle_up"	-- 19
+}
+local wpn_rifles = {
+					"wpn_ak74",
+					"wpn_ak74u",
+					"wpn_ak74_up",
+					"wpn_ak74_up2",
+					"wpn_ak74_minigame",
+					"wpn_ak74u_minigame",
+					"mar_quest_wpn_ak74u_1",
+					"wpn_bm16",
+					"wpn_toz34",
+					"wpn_wincheaster1300",
+					"wpn_spas12",
+					"wpn_mp5",
+					"wpn_abakan",
+					"wpn_l85",
+					"wpn_lr300",
+					"wpn_groza",
+					"wpn_val",
+					"wpn_vintorez",
+					"wpn_svu",
+					"wpn_svd",
+					"wpn_rg-6",
+					"wpn_rpg7",
+					"wpn_g36",
+					"wpn_fn2000",
+					"wpn_pkm",
+					"wpn_gauss",
+					"wpn_gauss_aes",
+					"wpn_lr300_minigame",
+					"wpn_lr300_up2",
+					"wpn_mp5_minigame",
+					"wpn_val_minigame",
+					"wpn_vintorez_up"
+}
+local wpn_grenades ={
+					"grenade_f1",
+					"grenade_rgd5",
+					"grenade_gd-05"					
+}					
+
+local wpn_misc = {"wpn_knife",
+				  "wpn_binoc"
+}
+
+local infos ={
+ 					"mar_quest_scout_pda",
+					"mil_device_pda_lost_squard",
+					"agr_pda_for_secret_trader",
+					"agr_map_animals",
+					"red_forest_pda_map",
+					"red_forest_pda_map_2",
+					"mil_device_pda_lost_squard",
+					"esc_device_pda_driver",
+					"agr_pda_for_secret_trader",
+					"agr_map_animals",
+					"red_forest_pda_map",
+					"red_forest_pda_map_2"
+}
+local ammos = {
+					"ammo_9x18_fmj",
+					"ammo_9x18_pmm",
+					"ammo_9x19_fmj",
+					"ammo_9x19_pbp",
+					"ammo_11.43x23_fmj",
+					"ammo_11.43x23_hydro",
+					"ammo_5.45x39_fmj",
+					"ammo_5.45x39_ap",
+					"ammo_5.56x45_ss190",
+					"ammo_5.56x45_ap",
+					"ammo_pkm_100",
+					"ammo_7.62x54_7h14",
+					"ammo_223_fmj",
+					"ammo_gauss",
+					"ammo_9x39_pab9",
+					"ammo_9x39_ap",
+					"ammo_12x70_buck",
+					"ammo_12x76_dart",
+					"ammo_12x76_zhekan",
+					"ammo_og-7b",
+					"ammo_vog-25p",
+					"ammo_vog-25",
+					"ammo_m209",
+					"ammo_minigame",
+					"flesh_up_ac_spas12"
+}
+local prv_items_tbl = {}
+local items_tbl_list = {wpn_pistols, wpn_rifles, wpn_grenades, wpn_misc}
+
+class "set_list_text" (CUIListItemEx)
+
+function set_list_text:__init() super()
+	
+	local ca = 255
+	local cr = 216
+	local cg = 186
+	local cb = 140
+	
+	self.name					= CUIStatic	()
+	self.name:SetAutoDelete		(true)
+	self:AttachChild			(self.name)
+	self.name:SetWndRect		(Frect():set(0,0,300,22))
+	self.name:SetFont			(GetFontLetterica18Russian())
+	self.name:SetTextColor		(ca,cr,cg,cb)
+	self.name:SetElipsis		(2,2)
+
+    self.text					= CUIStatic	()
+    self.text:SetAutoDelete		(true)
+	self:AttachChild			(self.text)
+	self.text:SetWndRect		(Frect():set(290,0,300,22))
+	self.text:SetFont			(GetFontLetterica16Russian())
+	self.text:SetTextColor		(ca,cr,cg,cb)
+end
+					
+class "si_dlg" (CUIScriptWnd)
+
+function si_dlg:__init() super()
+   self:InitControls()
+   self:InitCallBacks()
+   weapons = voron_utils.utils:FillTable(items_tbl_list)
+   self:FillList(weapons)
+end
+
+function si_dlg:__finalize()
+end
+
+function si_dlg:InitControls()
+	self:SetWndRect			(Frect():set(0,0,1024,768))
+	
+	local xml				= CScriptXmlInit()
+	local ctrl
+	xml:ParseFile			("voron_ui_mm_si_dlg.xml")
+
+	xml:InitStatic			("background",self)
+	
+	ctrl		  			= CUIWindow()
+	
+	self.form				= xml:InitStatic("form",self)
+	
+	xml:InitStatic			("form:voron_mod_icon", self)
+	xml:InitStatic			("form:caption",self.form)
+	
+	ctrl					= xml:Init3tButton("form:btn_weapons",self)
+	self:Register			(ctrl, "btn_weapons")
+	ctrl					= xml:Init3tButton("form:btn_addons",self)
+	self:Register			(ctrl, "btn_addons")
+	ctrl					= xml:Init3tButton("form:btn_outfits",self)
+	self:Register			(ctrl, "btn_outfits")
+	ctrl					= xml:Init3tButton("form:btn_devices",self)
+	self:Register			(ctrl, "btn_devices")
+	ctrl					= xml:Init3tButton("form:btn_ammos",self)
+	self:Register			(ctrl, "btn_ammos")
+	ctrl					= xml:Init3tButton("form:btn_artefacts",self)
+	self:Register			(ctrl, "btn_artefacts")
+	ctrl					= xml:Init3tButton("form:btn_foods",self)
+	self:Register			(ctrl, "btn_foods")
+	ctrl					= xml:Init3tButton("form:btn_infos",self)
+	self:Register			(ctrl, "btn_infos")
+	
+	self.list_frame = xml:InitFrame	("form:list_frame",self)
+	
+	self.list = xml:InitList 	("form:list",self)
+	self.list:ShowSelectedItem	(true)
+	self:Register				(self.list, "list")
+
+	self.check_to_actor			= xml:InitCheck("form:check_own_to_actor",self)
+	self.check_to_actor:SetCheck(true)
+	
+	ctrl						= xml:Init3tButton("form:btn_create",self)	
+	self:Register				(ctrl, "btn_create")
+
+	ctrl = xml:Init3tButton		("form:btn_close",self)	
+	self:Register				(ctrl, "btn_close")
+end
+
+function si_dlg:InitCallBacks()
+	self:AddCallback("btn_weapons",	  ui_events.BUTTON_CLICKED,          self.OnButton_weapons_clicked,	self)
+	self:AddCallback("btn_addons",	  ui_events.BUTTON_CLICKED,          self.OnButton_addons_clicked,	self)
+	self:AddCallback("btn_ammos",	  ui_events.BUTTON_CLICKED,          self.OnButton_ammos_clicked,	self)
+	self:AddCallback("btn_outfits",	  ui_events.BUTTON_CLICKED,          self.OnButton_outfits_clicked,	self)
+	self:AddCallback("btn_devices",	  ui_events.BUTTON_CLICKED,          self.OnButton_devices_clicked,	self)
+	self:AddCallback("btn_artefacts", ui_events.BUTTON_CLICKED,          self.OnButton_artefacts_clicked, self)
+	self:AddCallback("btn_foods",	  ui_events.BUTTON_CLICKED,          self.OnButton_foods_clicked,	self)
+	self:AddCallback("btn_infos",	  ui_events.BUTTON_CLICKED,          self.OnButton_infos_clicked,	self)
+	
+	self:AddCallback("list",		  ui_events.WINDOW_LBUTTON_DB_CLICK, self.OnButton_create_clicked,	self)
+	
+    self:AddCallback("btn_create",	  ui_events.BUTTON_CLICKED,          self.OnButton_create_clicked,	self)
+	self:AddCallback("btn_close",	  ui_events.BUTTON_CLICKED,          self.OnButton_close_clicked,	self)
+end
+
+function si_dlg:OnButton_weapons_clicked()
+	self:FillList(weapons)
+end
+function si_dlg:OnButton_addons_clicked()
+	self:FillList(wpn_addons)
+end
+function si_dlg:OnButton_ammos_clicked()
+	self:FillList(ammos)
+end
+function si_dlg:OnButton_outfits_clicked()
+	self:FillList(outfits)
+end
+function si_dlg:OnButton_devices_clicked()
+	self:FillList(devices)
+end
+function si_dlg:OnButton_artefacts_clicked()
+	self:FillList(artefacts)
+end
+function si_dlg:OnButton_foods_clicked()
+	self:FillList(food_n_drugs)
+end
+function si_dlg:OnButton_infos_clicked()
+	self:FillList(infos)
+end
+
+function si_dlg:FillList(sections)
+ 		
+	for i = 1, #prv_items_tbl do
+		self.list:RemoveItem(prv_items_tbl[i])
+	end
+	
+	for i = 1, #sections do
+		local _itm = set_list_text()
+		
+		self.item_name = game.translate_string(system_ini():r_string(sections[i], "inv_name"))
+				
+		_itm.name:SetText (self.item_name)
+		_itm.text:SetText (sections[i])
+		self.list:AddItem (_itm)
+	end
+    prv_items_tbl = sections
+end
+
+function si_dlg:OnButton_create_clicked()
+	if self.list:GetSize() == 0 then
+		return
+	end
+	
+	local index = self.list:GetSelectedItem()
+	
+	if index == -1 then 
+		return 
+	end
+
+	local item	   = self.list:GetItem(index)
+	local itmname  = item.text:GetText()
+	local id
+	local actv_slt = db.actor:active_slot()
+	local actv_itm = db.actor:active_item()
+	local itm_in_slt = db.actor:item_in_slot(slot_num)
+	
+	if self.check_to_actor:GetCheck() then
+		id = db.actor:id()
+	else
+		id = -1
+	end
+	
+	alife():create(itmname, db.actor:position(), 0, 0, id)    
+end
+
+function si_dlg:OnButton_close_clicked()
+	local console 	= get_console()
+	console:execute	("main_menu off")
+end
+
+function si_dlg:OnKeyboard(dik, keyboard_action)
+	local bind = dik_to_bind(dik)
+	if bind == key_bindings.kQUIT then
+		self:OnButton_close_clicked()
+	else
+	if dik==28 then
+		self:OnButton_create_clicked()
+	end
+	end
+	   
+	return true
+end
+
